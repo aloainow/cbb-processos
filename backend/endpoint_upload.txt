@@ -1,0 +1,31 @@
+
+@app.post("/api/processos/{processo_id}/documentos", tags=["Documentos"])
+async def upload_documento(
+    processo_id: int,
+    arquivo: UploadFile = File(...),
+    nome: str = Form(...),
+    tipo_documento: str = Form(...),
+    descricao: str = Form(None),
+    current_user: UsuarioResponse = Depends(get_current_active_user)
+):
+    import os
+    supabase = get_supabase_admin()
+    upload_dir = f"/tmp/cbb_documentos/{processo_id}"
+    os.makedirs(upload_dir, exist_ok=True)
+    file_path = f"{upload_dir}/{arquivo.filename}"
+    content = await arquivo.read()
+    with open(file_path, "wb") as f:
+        f.write(content)
+    doc_data = {
+        "processo_id": processo_id,
+        "nome": nome,
+        "tipo_documento": tipo_documento,
+        "descricao": descricao,
+        "arquivo_url": file_path,
+        "arquivo_nome": arquivo.filename,
+        "arquivo_tamanho": len(content),
+        "arquivo_tipo": arquivo.content_type,
+        "criado_por": current_user.id
+    }
+    result = supabase.table("documentos").insert(doc_data).execute()
+    return {"message": "Sucesso", "documento": result.data[0]}

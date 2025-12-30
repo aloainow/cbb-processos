@@ -1,0 +1,61 @@
+import Link from 'next/link';
+import { useAuthStore } from '@/lib/store';
+import { FiLogOut, FiUser } from 'react-icons/fi';
+
+export default function Header() {
+  const { usuario, logout } = useAuthStore();
+  
+  const handleLogout = () => {
+    logout();
+    window.location.href = '/login';
+  };
+  
+  return (
+    <header className="header-sei h-16 flex items-center justify-between px-6">
+      <div className="flex items-center space-x-8">
+        <Link href="/dashboard" className="flex items-center space-x-3">
+          <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+            <span className="text-sei-header font-bold text-xl">🏀</span>
+          </div>
+          <div>
+            <h1 className="text-xl font-bold">CBB</h1>
+            <p className="text-xs text-blue-200">Sistema de Processos Eletrônicos</p>
+          </div>
+        </Link>
+        
+        <nav className="hidden md:flex space-x-6">
+          <Link href="/dashboard" className="text-white hover:text-blue-200 transition-colors">
+            Início
+          </Link>
+          <Link href="/processos" className="text-white hover:text-blue-200 transition-colors">
+            Processos
+          </Link>
+          <Link href="/processos/novo" className="text-white hover:text-blue-200 transition-colors">
+            Novo Processo
+          </Link>
+        </nav>
+      </div>
+      
+      {usuario && (
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 text-white">
+            <FiUser className="text-blue-200" />
+            <div className="text-right hidden md:block">
+              <p className="text-sm font-semibold">{usuario.nome}</p>
+              <p className="text-xs text-blue-200">{usuario.cargo || 'Usuário'}</p>
+            </div>
+          </div>
+          
+          <button
+            onClick={handleLogout}
+            className="flex items-center space-x-1 text-white hover:text-blue-200 transition-colors"
+            title="Sair"
+          >
+            <FiLogOut />
+            <span className="hidden md:inline">Sair</span>
+          </button>
+        </div>
+      )}
+    </header>
+  );
+}

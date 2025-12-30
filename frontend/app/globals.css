@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos base inspirados no SEI */
+@layer base {
+  body {
+    @apply bg-white text-gray-800 font-sans;
+  }
+  
+  input, textarea, select {
+    @apply border border-sei-border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-sei-blue;
+  }
+  
+  button {
+    @apply px-4 py-2 rounded transition-colors;
+  }
+}
+
+@layer components {
+  /* Botão primário (estilo SEI) */
+  .btn-primary {
+    @apply bg-sei-blue text-white hover:bg-sei-blue-dark disabled:bg-gray-400 disabled:cursor-not-allowed;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-500 text-white hover:bg-gray-600;
+  }
+  
+  .btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700;
+  }
+  
+  .btn-success {
+    @apply bg-green-600 text-white hover:bg-green-700;
+  }
+  
+  /* Card estilo SEI */
+  .card {
+    @apply bg-white border border-sei-border rounded shadow-sm;
+  }
+  
+  /* Tabela estilo SEI */
+  .table-sei {
+    @apply w-full border-collapse;
+  }
+  
+  .table-sei thead {
+    @apply bg-sei-gray border-b-2 border-sei-border;
+  }
+  
+  .table-sei th {
+    @apply px-4 py-2 text-left text-sm font-semibold text-sei-gray-dark;
+  }
+  
+  .table-sei td {
+    @apply px-4 py-2 text-sm border-b border-sei-border;
+  }
+  
+  .table-sei tbody tr:hover {
+    @apply bg-blue-50;
+  }
+  
+  /* Árvore de documentos */
+  .tree-item {
+    @apply flex items-center py-1 px-2 hover:bg-blue-50 cursor-pointer rounded;
+  }
+  
+  .tree-item.selected {
+    @apply bg-blue-100 font-semibold;
+  }
+  
+  /* Badge de status */
+  .badge {
+    @apply inline-block px-2 py-1 text-xs rounded;
+  }
+  
+  .badge-aberto {
+    @apply bg-blue-100 text-blue-800;
+  }
+  
+  .badge-em-tramite {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+  
+  .badge-concluido {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .badge-arquivado {
+    @apply bg-gray-100 text-gray-800;
+  }
+  
+  .badge-urgente {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .badge-alta {
+    @apply bg-orange-100 text-orange-800;
+  }
+  
+  .badge-normal {
+    @apply bg-blue-100 text-blue-800;
+  }
+  
+  .badge-baixa {
+    @apply bg-gray-100 text-gray-800;
+  }
+  
+  /* Campo de formulário */
+  .form-group {
+    @apply mb-4;
+  }
+  
+  .form-label {
+    @apply block text-sm font-semibold mb-1 text-sei-gray-dark;
+  }
+  
+  .form-control {
+    @apply w-full border border-sei-border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sei-blue;
+  }
+  
+  /* Barra lateral */
+  .sidebar {
+    @apply bg-sei-menu border-r border-sei-border h-screen overflow-y-auto;
+  }
+  
+  /* Menu item */
+  .menu-item {
+    @apply flex items-center px-4 py-2 text-sei-gray-dark hover:bg-blue-50 cursor-pointer transition-colors;
+  }
+  
+  .menu-item.active {
+    @apply bg-sei-blue text-white hover:bg-sei-blue-dark;
+  }
+  
+  /* Header estilo SEI */
+  .header-sei {
+    @apply bg-sei-header text-white shadow-md;
+  }
+}
+
+/* Scrollbar customizada */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
